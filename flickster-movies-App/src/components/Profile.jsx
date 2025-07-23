@@ -1,17 +1,12 @@
-// Having imports to help us be able to use the necessary modules and components
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import './Profile.css';
 
 function Profile() {
-  // useNavigate here will help in redirecting a user to the Home page after successfully creating an account
-  // After creating an account the user is automatically logged in and redirected to the Home page
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  // State to help switch between Login and Register form
   const [isLogin, setIsLogin] = useState(true);
-
-  // Using state to store form input values
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -21,21 +16,14 @@ function Profile() {
     confirmPassword: '',
   });
 
-  // State to hold registered user's data
   const [registeredUser, setRegisteredUser] = useState(null);
-
-  // State to toggle password visibility using FaEye
   const [showPassword, setShowPassword] = useState(false);
-
-  // State for displaying error messages incase the page doesn't load
   const [error, setError] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // State to display the submitted data upon successful registration
-  const [submittedData, setSubmittedData] = useState(null);
-
-  // Switch between login and registration form
+  // Toggle between login and registration
   const toggleForm = () => {
-    setIsLogin(!isLogin); 
+    setIsLogin(!isLogin);
     setFormData({
       firstName: '',
       lastName: '',
@@ -45,50 +33,80 @@ function Profile() {
       confirmPassword: '',
     });
     setError('');
-    setSubmittedData(null);
   };
 
+  // Handle form field changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handles form submission (both for login and registration)
+  // Handle login and registration
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!isLogin) {
+      // Registration mode
       if (formData.password !== formData.confirmPassword) {
         setError('Passwords do not match.');
         return;
       }
 
-      // Saves registered user details
-      setRegisteredUser({
+      const newUser = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
         email: formData.email,
         password: formData.password,
-      });
+      };
 
-      // Displays the submitted data
-      setSubmittedData(formData); 
+      setRegisteredUser(newUser);
+      localStorage.setItem('user', JSON.stringify(newUser));
+      setIsLoggedIn(true);
       setError('');
-      navigate('/home'); 
+      navigate('/home');
     } else {
+      // Login mode
+      const savedUser = JSON.parse(localStorage.getItem('user'));
+
       if (
-        registeredUser &&
-        formData.email === registeredUser.email &&
-        formData.password === registeredUser.password
+        savedUser &&
+        formData.email === savedUser.email &&
+        formData.password === savedUser.password
       ) {
+        setRegisteredUser(savedUser);
+        setIsLoggedIn(true);
         setError('');
-        navigate('/home'); // Navigate to home after successful login
+        navigate('/home');
       } else {
         setError('Incorrect email or password.');
       }
     }
   };
 
+  // Handle logout
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('user');
+    navigate('/');
+  };
+
+  useEffect(() => {
+    const savedUser = JSON.parse(localStorage.getItem('user'));
+    if (savedUser) {
+      setRegisteredUser(savedUser);
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <div className="profile-container">
-     <h2>{isLogin ? 'Login to Your Account' : 'Create a New Account'}</h2>
+      {isLoggedIn && (
+        <button className="logout-button" onClick={handleLogout}>
+          Logout
+        </button>
+      )}
+
+      <h2>{isLogin ? 'Login to Your Account' : 'Create a New Account'}</h2>
+
       <form className="profile-form" onSubmit={handleSubmit}>
         {!isLogin && (
           <>
@@ -119,7 +137,6 @@ function Profile() {
           </>
         )}
 
-        {/* Email field which is same for both login and register) */}
         <input
           type="email"
           name="email"
@@ -129,7 +146,6 @@ function Profile() {
           required
         />
 
-        {/* Password field with show/hide toggle */}
         <div className="password-field">
           <input
             type={showPassword ? 'text' : 'password'}
@@ -147,7 +163,6 @@ function Profile() {
           </span>
         </div>
 
-        {/* Confirm Password field shown only during registration */}
         {!isLogin && (
           <input
             type={showPassword ? 'text' : 'password'}
@@ -159,32 +174,18 @@ function Profile() {
           />
         )}
 
-        {/* Display error messages if any */}
         {error && <p className="error">{error}</p>}
 
-        <button type="submit">
+        <button type="submit" className="submit-button">
           {isLogin ? 'Login' : 'Create Account'}
         </button>
       </form>
 
-      {/* Toggle between Login and Register */}
       <p onClick={toggleForm} className="toggle-link">
         {isLogin
           ? "Don't have an account? Create one"
           : 'Already have an account? Login'}
       </p>
-
-      {/* Display submitted data after registration */}
-      {submittedData && (
-        <div className="submitted-data">
-          <h4>Submitted Information:</h4>
-          <p>
-            Name: {submittedData.firstName} {submittedData.lastName}
-          </p>
-          <p>Email: {submittedData.email}</p>
-          <p>Phone: {submittedData.phone}</p>
-        </div>
-      )}
     </div>
   );
 }
