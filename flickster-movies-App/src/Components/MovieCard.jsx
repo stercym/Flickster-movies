@@ -15,6 +15,17 @@ function MovieCard({ movie }) {
       <p>Actors: {movie.Actors}</p>
       <p>Directors: {movie.Director}</p>
       <p>Genre: {movie.Genre}</p>
+        <p>Language: {movie.Language}</p>
+    <p>Plot: {movie.Plot}</p>
+          <p>images: {movie.images}</p>
+          <div>
+          <h4>Additional Images:</h4>
+          {movie.Images.map((imgSrc, index) => (
+            <img key={index} src={imgSrc} alt={`${movie.Title} image ${index + 1}`} style={{ maxWidth: '100px', margin: '5px' }} />
+          ))}
+        </div>
+
+
     </div>
   );
 }

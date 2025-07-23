@@ -1,5 +1,6 @@
 import { useState ,useEffect} from 'react'
 import MovieCard from './Components/MovieCard'
+import SortMovies from './Components/SortMovies';
 
 function App() {
   const [movies,setMovies]=useState([]);
