@@ -1,12 +1,94 @@
-# React + Vite
+# Flickster Movies App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Flickster Movies App is a full-featured movie discovery web app built with React. It allows users to search for movies, sort them, rate and favorite them, toggle dark/light mode, and interact through comments. The app aims to provide a seamless and engaging user experience for movie enthusiasts.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Navigation Bar
+- Home
+- Favorite Movies
+- Watchlist
+- Top Rated
+- New Releases
+- Login/Register
 
-## Expanding the ESLint configuration
+### Search Functionality
+- It has a Search field which allows users search movies by:
+  - Title
+  - Writer
+  - Year of Release
+  - Actors
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Movie Card Component
+Each movie information is displayed on a movie card with:
+- Poster Image
+- Title
+- Writer
+- Year of Release
+- Country
+- Type (Movie/Series)
+- Actors
+- Director
+- Genre
+
+### Sorting Component
+Users can sort movies by:
+- Year of Release
+- IMDb Rating
+- Runtime
+
+### User Rating System
+- 5-star clickable rating system (1 = Poor, 5 = Excellent)
+- Displays average rating from all users
+
+### Dark/Light Mode Toggle
+- Toggle slider to switch between light and dark themes
+- Uses `isDarkMode` state for mode tracking
+
+### User Profile & Authentication
+- Register and Login form
+- Form fields: Full Name, Email, Phone Number, Password
+- Email & password validation
+- Redirects to Home after successful login
+- Displays error messages for invalid credentials
+
+### Favorite Movie Feature
+- Heart icon toggle to favorite/unfavorite a movie
+- Uses state to track favorite status
+
+### Favorite Count
+- Tracks number of times each movie has been favorited
+
+### Comment System
+- Users can post and view comments on each movie
+
+###  About
+- Additional pages to provide user support and information
+
+
+## Tech Stack
+
+- **Frontend**: React, JSX, CSS
+- **Routing**: react-router-dom
+- **Mock Backend**: JSON Server (`db.json`)
+- **Icons**: React Icons
+
+---
+
+## Getting Started
+
+### Prerequisites
+Make sure you have the following:
+- Node.js
+- npm
+- Git
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/stercym/Flickster-movies/
+cd Flickster-movies
+
+ ## Author Stercy
