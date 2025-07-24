@@ -1,23 +1,77 @@
-.card-container{
-  display:flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
-  background-color: #121212;
-  color: #e0e0e0;
+body{
+  margin: 0;
+  padding: 0;
+  background-color: #000
 }
-.movie-card{
-  width: 350px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-  background-color: #1f1f1f;
-  transition: transform 0.2s;
+
+.movie-card {
+    background-color: #141414; 
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s ease;
+    cursor: pointer;
+    position: relative; 
+    margin: 10px; 
+    display: flex;
+    flex-direction: column;
+    width: 200px; 
+    height: auto;
 }
-.movie-poster{
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-  border-bottom: 2px solid;
+.movie-card:hover {
+    transform: translateY(-5px);
 }
+
+.movie-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.movie-header img {
+    width: 100%;
+    height: 300px; 
+    object-fit: cover; 
+    display: block;
+    border-bottom: 1px solid #333;
+}
+
+.movie-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+    text-align: center;
+    color: #333;
+}
+
+.movie-details {
+
+    padding: 15px;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+}
+
+
+
+.cinematheque-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin: 20px 0 30px; 
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
