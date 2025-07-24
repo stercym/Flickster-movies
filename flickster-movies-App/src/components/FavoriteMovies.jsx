@@ -1,7 +1,5 @@
-
-
 import React, { useState } from 'react';
-import { FaHeart, FaRegHeart } from 'react-icons/fa'; // Make sure you have react-icons installed
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 
 function FavoriteMovies({ favoriteMovies }) {
@@ -12,12 +10,6 @@ function FavoriteMovies({ favoriteMovies }) {
   };
   return (
     <>
-      {/* <h2>Favorite Movies</h2>
-      <div className="movie-grid">
-        {favoriteMovies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ))}
-      </div> */}
        {/* Enables one to click on the favorite Heart Icon */}
       <div onClick={handleFavoriteClick} style={{ cursor: 'pointer', fontSize: '1.5rem', color: isFavorite ? 'red' : 'gray' }}>
         {isFavorite ? <FaHeart /> : <FaRegHeart />}

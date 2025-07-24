@@ -13,11 +13,11 @@ function App() {
 
   useEffect(() => {
     fetch(' http://localhost:3000/moviesAndSeries')
-      .then(res => res.json())// fetched data is converted to json format
+      .then(res => res.json())
       .then((data) => {
         setMovies(data);
       })
-  }, []);// the empty dependecy array prevents rerendering of app component
+  }, []);// the empty dependecy array will prevent app component from rerendering
 
 
   return (
