@@ -5,8 +5,8 @@ function MovieCard({ movie }) {
 
   
   return (
-    <div>
-      <img src={movie.Poster} alt={movie.Title} />
+    <div className='movie-card'>
+      <img className='movie-poster' src={movie.Poster} alt={movie.Title} />
       <h3>{movie.Title}</h3>
       <p>Writer: {movie.Writer}</p>
       <p>Year of release: {movie.Year}</p>
@@ -17,7 +17,6 @@ function MovieCard({ movie }) {
       <p>Genre: {movie.Genre}</p>
         <p>Language: {movie.Language}</p>
     <p>Plot: {movie.Plot}</p>
-          <p>images: {movie.images}</p>
           <div>
           <h4>Additional Images:</h4>
           {movie.Images.map((imgSrc, index) => (
