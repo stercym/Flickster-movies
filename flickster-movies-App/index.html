@@ -1,13 +1,93 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flickster Movie App</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <h1 class="logo">🎬 Flickster</h1>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#help" id="helpBtn">Help</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2>Submit Your Feedback</h2>
+    <form id="feedbackForm">
+      <input type="text" name="username" placeholder="Your name" required />
+
+      <select name="movie" required>
+        <option value="">🎥 Select Movie</option>
+        <option value="AVENGERS">AVENGERS</option>
+        <option value="SPIDERMAN">SPIDERMAN</option>
+        <option value="BEN 10">BEN 10</option>
+      </select>
+
+      <div class="rating">
+        <input type="radio" name="rating" id="star5" value="5"><label for="star5">&#9733;</label>
+        <input type="radio" name="rating" id="star4" value="4"><label for="star4">&#9733;</label>
+        <input type="radio" name="rating" id="star3" value="3"><label for="star3">&#9733;</label>
+        <input type="radio" name="rating" id="star2" value="2"><label for="star2">&#9733;</label>
+        <input type="radio" name="rating" id="star1" value="1"><label for="star1">&#9733;</label>
+      </div>
+
+      <textarea name="comment" placeholder="Your comment..." required></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+
+    <div id="commentsSection">
+      <h3>User Comments</h3>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <section id="about" class="container">
+    <h2>About Flickster</h2>
+    <p>
+      Flickster is your ultimate destination for sharing movie experiences. Whether you're a casual viewer or a hardcore movie buff, Flickster lets you rate, review, and explore films from all genres.
+    </p>
+    <p>
+      Our mission is to connect movie lovers around the world by giving them a simple, fun way to share their thoughts — one review at a time.
+    </p>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="container">
+    <h2>Contact Us</h2>
+    <p>If you have any questions, feedback, or suggestions, feel free to reach out to us through the following numbers:</p>
+    <ul>
+      <li>📞 +254728916613</li>
+      <li>📞 +254716280804</li>
+    </ul>
+  </section>
+
+  <!-- Help Section -->
+  <section id="help" class="container">
+    <h2>Help</h2>
+    <p>Need assistance using Flickster? Here's how you can get help:</p>
+    <ul>
+      <li>Fill in your name before submitting.</li>
+      <li>Choose a movie from the dropdown list.</li>
+      <li>Select a rating (1 to 5 stars).</li>
+      <li>Write a meaningful comment about the movie.</li>
+      <li>📞 For support, call: +254728916613 or +254716280804</li>
+    </ul>
+    <p>Still stuck? Contact us and we'll assist you.</p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
 </html>
