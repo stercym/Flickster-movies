@@ -35,12 +35,12 @@ function Profile() {
     setError('');
   };
 
-  // Handle form field changes
+  // Input form data
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle login and registration
+  // login and registration
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -81,6 +81,8 @@ function Profile() {
       }
     }
   };
+
+
 
   // Handle logout
   const handleLogout = () => {
