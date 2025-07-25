@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import React from 'react';
 
+function FavoriteMovies() {
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-function FavoriteMovies({ favoriteMovies }) {
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  const handleFavoriteClick = () => {
-    setIsFavorite((prev) => !prev);
-  };
   return (
-    <>
-       {/* Enables one to click on the favorite Heart Icon */}
-      <div onClick={handleFavoriteClick} style={{ cursor: 'pointer', fontSize: '1.5rem', color: isFavorite ? 'red' : 'gray' }}>
-        {isFavorite ? <FaHeart /> : <FaRegHeart />}
-        <span style={{ marginLeft: '0.5rem' }}>{isFavorite ? 'Favorited' : 'Add to Favorites'}</span>
-      </div>
-    </>
+    <div>
+      <h2>Your Favorite Movies</h2>
+      {favorites.length === 0 ? (
+        <p>No favorite movies yet.</p>
+      ) : (
+        <div className="movie-list">
+          {favorites.map((movie) => (
+            <div key={movie.id} className="movie-card">
+              <img src={movie.Poster} alt={movie.Title} />
+              <h3>{movie.Title}</h3>
+              <p>{movie.Year}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 

@@ -1,48 +1,66 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Profile from './components/Profile';
 import Home from './components/Home';
-import { useState, useEffect } from 'react'
 import MovieCard from './components/MovieCard';
 import FavoriteMovies from './components/FavoriteMovies';
+import Navbar from './components/Navbar';
+import SearchBar from './components/SearchBar';
+import NewReleases from './components/NewReleases';
 import './App.css';
-
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    fetch(' http://localhost:3000/moviesAndSeries')
+    fetch('http://localhost:3000/moviesAndSeries')
       .then(res => res.json())
-      .then((data) => {
-        setMovies(data);
-      })
-  }, []);// the empty dependecy array will prevent app component from rerendering
+      .then(data => setMovies(data));
+  }, []);
 
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
+  const filteredMovies = movies.filter(movie =>
+    movie.Title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-  <>
-    <h1 id="home-heading">Hello, here is our Movies Home Page</h1>
-    <Routes>
-      <Route path="/" element={<Profile />} />
-      <Route path="/home" element={<Home />} />
-    </Routes>
+    <>
+      <Navbar />
+      <SearchBar onSearch={handleSearch} />
 
-    <div>
-      <h1>Popular Movies</h1>
-      <div className="movie-list">
-        {movies.length > 0 ? (
-          movies.map(movie => (
-            <MovieCard key={movie.id} movie={movie} image={movie.Poster} />
-          ))
-        ) : (
-          <p>No movies found.</p>
-        )}
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <h1 id="home-heading">Hello, here is our Movies Home Page</h1>
+              <h1>Popular Movies</h1>
+              <div className="movie-list">
+                {filteredMovies.length > 0 ? (
+                  filteredMovies.map(movie => (
+                    <MovieCard key={movie.id} movie={movie} />
+                  ))
+                ) : (
+                  <p>No movies found.</p>
+                )}
+              </div>
+            </div>
+          }
+        />
 
-      <FavoriteMovies favoriteMovies={movies} />
-    </div>
-  </>
-);
+        <Route path="/favorites" element={<FavoriteMovies />} />
+        <Route path="/watchlist" element={<div>Watchlist</div>} />
+        <Route path="/top-rated" element={<div>Top Rated</div>} />
+        <Route path="/new-releases" element={<NewReleases />} />
+        <Route path="/login" element={<Profile />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </>
+  );
 }
+
 export default App;

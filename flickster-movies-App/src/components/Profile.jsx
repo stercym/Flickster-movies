@@ -82,8 +82,6 @@ function Profile() {
     }
   };
 
-
-
   // Handle logout
   const handleLogout = () => {
     setIsLoggedIn(false);
