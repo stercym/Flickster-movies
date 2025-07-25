@@ -7,6 +7,9 @@ import FavoriteMovies from './components/FavoriteMovies';
 import Navbar from './components/Navbar';
 import SearchBar from './components/SearchBar';
 import NewReleases from './components/NewReleases';
+import Footer from './components/Footer';
+import Help from "./components/Help";
+
 import './App.css';
 
 function App() {
@@ -48,6 +51,15 @@ function App() {
                   <p>No movies found.</p>
                 )}
               </div>
+              <div id="about-section" className="about-section">
+                <h2>About Flickster</h2>
+                <p>
+                  Flickster is your ultimate destination for sharing movie experiences. Whether you're a casual viewer or a hardcore movie buff, Flickster lets you rate, review, and explore films from all genres.
+                </p>
+                <p>
+                  Our mission is to connect movie lovers around the world by giving them a simple, fun way to share their thoughts — one review at a time.
+                </p>
+              </div>
             </div>
           }
         />
@@ -58,7 +70,9 @@ function App() {
         <Route path="/new-releases" element={<NewReleases />} />
         <Route path="/login" element={<Profile />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/help" element={<Help />} />
       </Routes>
+      <Footer></Footer>
     </>
   );
 }

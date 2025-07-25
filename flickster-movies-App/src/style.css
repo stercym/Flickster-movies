@@ -1,0 +1,122 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f2f5;
+  margin: 0;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  padding: 30px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #007BFF;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.rating {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  font-size: 28px;
+  color: #ccc;
+  cursor: pointer;
+  padding: 5px;
+  transition: color 0.3s;
+}
+
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color: #FFD700;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #007BFF;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+#commentsSection {
+  margin-top: 30px;
+}
+
+.comment-box {
+  background: #f8f9fa;
+  border-left: 4px solid #007BFF;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.comment-box strong {
+  color: #007BFF;
+}
+
+.comment-box .stars {
+  color: #FFD700;
+  font-size: 18px;
+}
+
+.comment-box p {
+  margin: 5px 0 0;
+}
+
+/* Help highlight */
+#help.highlight {
+  animation: flash 2s ease;
+  border: 2px dashed #007BFF;
+}
+
+@keyframes flash {
+  0% { background-color: #e3f2fd; }
+  50% { background-color: #ffffff; }
+  100% { background-color: #e3f2fd; }
+}
