@@ -1,35 +1,80 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import Profile from './components/Profile';
+import Home from './components/Home';
+import MovieCard from './components/MovieCard';
+import FavoriteMovies from './components/FavoriteMovies';
+import Navbar from './components/Navbar';
+import SearchBar from './components/SearchBar';
+import NewReleases from './components/NewReleases';
+import Footer from './components/Footer';
+import Help from "./components/Help";
+import MovieDetails from './components/MovieDetails';
+import About from './components/About';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const location = useLocation();
+  const [movies, setMovies] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showAbout, setShowAbout] = useState(false);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/moviesAndSeries')
+      .then(res => res.json())
+      .then(data => setMovies(data));
+  }, []);
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
+  const filteredMovies = movies.filter(movie =>
+    movie.Title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Navbar />
+      <SearchBar onSearch={handleSearch} />
+
+      <div className="main-content">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div>
+                <h1 id="home-heading">Hello, here is our Movies Home Page</h1>
+                <h1>Popular Movies</h1>
+                <div className="movie-list">
+                  {filteredMovies.length > 0 ? (
+                    filteredMovies.map(movie => (
+                      <MovieCard key={movie.id} movie={movie} />
+                    ))
+                  ) : (
+                    <p>No movies found.</p>
+                  )}
+                </div>
+              </div>
+            }
+          />
+          <Route path="/favorites" element={<FavoriteMovies />} />
+          <Route path="/watchlist" element={<div>Watchlist</div>} />
+          <Route path="/top-rated" element={<div>Top Rated</div>} />
+          <Route path="/new-releases" element={<NewReleases />} />
+          <Route path="/login" element={<Profile />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route path="/home" element={<Home showAbout={showAbout} />} />
+          <Route path="/" element={<Profile />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      {location.pathname === "/" && <Footer />}
+       {location.pathname === "/" && <About />}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

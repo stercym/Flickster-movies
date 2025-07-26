@@ -1,0 +1,22 @@
+{
+  "name": "flickster-movies",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev":"vite",
+    "json-server":"json-server --watch db.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stercym/Flickster-movies.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stercym/Flickster-movies/issues"
+  },
+  "homepage": "https://github.com/stercym/Flickster-movies#readme",
+  "description": ""
+}
