@@ -6,7 +6,7 @@ function MovieDetails() {
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/moviesAndSeries/${id}`)
+    fetch(`https://flickster-movies-server.onrender.com/moviesAndSeries/${id}`)
       .then(res => res.json())
       .then(data => setMovie(data));
   }, [id]);
