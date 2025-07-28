@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import "./SearchBar.css";
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
@@ -8,6 +9,10 @@ const SearchBar = ({ onSearch }) => {
     onSearch(query.trim());
   };
 
+  useEffect(() => {
+    onSearch(query.trim());
+  }, [query, onSearch]);
+
   return (
     <form onSubmit={handleSubmit} className="search-bar">
       <input
@@ -16,7 +21,7 @@ const SearchBar = ({ onSearch }) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button type="submit">  Search</button>
+      <button type="submit">Search</button>
     </form>
   );
 };

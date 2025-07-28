@@ -33,10 +33,16 @@ function App() {
     movie.Title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const showSearchBar =
+    location.pathname === '/' || location.pathname === '/favorites';
+
+
   return (
     <>
       <Navbar />
-      <SearchBar onSearch={handleSearch} />
+      {showSearchBar && (
+        <SearchBar onSearch={handleSearch} />
+      )}
 
       <div className="main-content">
         <Routes>
@@ -58,21 +64,29 @@ function App() {
               </div>
             }
           />
+          <Route
+            path="/home"
+            element={
+              <Home
+                movies={movies}
+                filteredMovies={filteredMovies}
+                onSearch={handleSearch}
+              />
+            }
+          />
+
           <Route path="/favorites" element={<FavoriteMovies />} />
           <Route path="/watchlist" element={<div>Watchlist</div>} />
           <Route path="/top-rated" element={<div>Top Rated</div>} />
           <Route path="/new-releases" element={<NewReleases />} />
           <Route path="/login" element={<Profile />} />
-          <Route path="/home" element={<Home />} />
           <Route path="/help" element={<Help />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
-          <Route path="/home" element={<Home showAbout={showAbout} />} />
-          <Route path="/" element={<Profile />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </div>
-
       {location.pathname === "/" && <Footer />}
-       {location.pathname === "/" && <About />}
     </>
   );
 }
