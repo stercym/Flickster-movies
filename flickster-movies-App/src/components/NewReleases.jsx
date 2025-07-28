@@ -7,7 +7,7 @@ function NewReleases() {
   const [recentMovies, setRecentMovies] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/moviesAndSeries')
+    fetch('https://flickster-movies-server.onrender.com/moviesAndSeries')
       .then((res) => res.json())
       .then((data) => {
         setMovies(data);
